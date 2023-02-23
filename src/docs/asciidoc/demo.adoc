@@ -1,0 +1,4 @@
+== 2. 인사하기
+
+=== 2-1. eunjiA
+operation::hello-controller-docs-test/hello-rest-docs[snippets='http-request,http-response']https://xxx[]

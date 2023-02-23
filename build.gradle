@@ -2,11 +2,16 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.7'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'org.asciidoctor.jvm.convert' version '3.3.2' //(1)
 }
 
 group = 'com.hello'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+configurations {
+	asciidoctorExt //(2)
+}
 
 repositories {
 	mavenCentral()
@@ -18,6 +23,41 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.hamcrest:hamcrest:2.2'
+
+	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor' //(3)
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+}
+
+ext {
+	set('snippetsDir', file("build/generated-snippets")) //(4)
+}
+
+test {
+	outputs.dir snippetsDir //(5)
+}
+
+asciidoctor {
+	configurations 'asciidoctorExt' //(6)
+	baseDirFollowsSourceFile() //(7)
+	inputs.dir snippetsDir //(8)
+	dependsOn test //(9)
+}
+
+asciidoctor.doFirst {
+	delete file('src/main/resources/static/docs') //(9)
+}
+
+task createDocument(type: Copy) { //(11)
+	dependsOn asciidoctor //(12)
+	from file("build/docs/asciidoc")
+	into file("src/main/resources/static")
+}
+
+bootJar {
+	dependsOn createDocument //(13)
+	from("${asciidoctor.outputDir}") { //(14)
+		into 'static/docs'
+	}
 }
 
 tasks.named('test') {

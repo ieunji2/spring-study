@@ -1,0 +1,16 @@
+== 3. 에러코드
+
+=== 인사하기 에러
+|===
+| error code | error message | show message | status code
+
+|`HEL001`
+| 인사를 하지 않았습니다.
+| 인사를 제대로 해주세요.
+|`400 Bad Request`
+
+|`HEL002`
+| 인사를 보지 못했네요.
+| 인사를 다시 해주세요.
+|`500 Internal Server Error`
+|===

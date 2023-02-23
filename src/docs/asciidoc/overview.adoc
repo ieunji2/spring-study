@@ -1,0 +1,8 @@
+== 1. 개요
+
+Spring Rest Docs Practice! +
+단점이 어렵다... 단점이 크다... +
+
+.참고
+* https://youtu.be/BoVpTSsTuVQ
+* https://helloworld.kurly.com/blog/spring-rest-docs-guide/
