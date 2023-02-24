@@ -1,6 +1,7 @@
 = Spring Study Application Document
 :toc: left
 :toclevels: 2
+:toc-title: 목차
 :sectlinks:
 :source-highlighter: highlightjs
 
